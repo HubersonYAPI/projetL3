@@ -1,32 +1,62 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
-
 require('./bootstrap');
 
 window.Vue = require('vue');
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. It will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.component('app-init', require('./AppInit.vue').default);
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+Vue.use(Vuetify)
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+
+import Dashboard from './views/Dashboard'
+import Products from './views/Products'
+import Users from './views/Users'
+import Profil from './views/Profil'
+import Laptop from './views/Laptop'
+import Uc from './views/Uc'
+
+const router = new VueRouter({
+    mode: 'history',
+    routes: [
+        {
+            path: '/',
+            name: 'dashboard',
+            component: Dashboard
+        },
+        {
+            path: '/products',
+            name: 'products',
+            component: Products,
+        },
+        {
+            path: '/users',
+            name: 'users',
+            component: Users,
+        },
+        {
+            path: '/profil',
+            name: 'profil',
+            component: Profil,
+        },
+        {
+            path: '/laptop',
+            name: 'laptop',
+            component: Laptop,
+        },
+        {
+            path: '/uc',
+            name: 'uc',
+            component: Uc,
+        }
+    ],
+});
 
 const app = new Vue({
     el: '#app',
+    router,
+    vuetify: new Vuetify(),
 });
